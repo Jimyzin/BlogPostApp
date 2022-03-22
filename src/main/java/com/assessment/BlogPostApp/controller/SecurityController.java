@@ -34,10 +34,8 @@ public class SecurityController {
     @Transactional
     public User login() {
         var user = User.builder()
-                .userId(234)
                 .username("user1")
                 .password("pass1")
-                //.userAuthorities(List.of(userAuthority))
                 .build();
 
         var userAuthority = Authority.builder()

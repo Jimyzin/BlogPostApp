@@ -20,10 +20,9 @@ public class Authority implements GrantedAuthority {
     private Integer authorityId;
     private String authority;
 
-    /*@ManyToMany(mappedBy = "authorities", cascade = CascadeType.ALL)*/
     @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "user",
             joinColumns = @JoinColumn(name = "authorityId"),
-            inverseJoinColumns = @JoinColumn(name = "userId"))
+            inverseJoinColumns = @JoinColumn(name = "username"))
     private List<User> users;
 }

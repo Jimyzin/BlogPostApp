@@ -136,7 +136,6 @@ public class BlogControllerTest {
                         .authorityId(1)
                         .authority("ADMIN")
                         .build()))
-                .userId(1)
                 .build();
     }
 

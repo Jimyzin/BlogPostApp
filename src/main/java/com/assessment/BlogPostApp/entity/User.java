@@ -15,9 +15,6 @@ import java.util.List;
 public class User {
 
     @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
     private String username;
     private String password;
 
@@ -26,6 +23,4 @@ public class User {
 
     @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Authority> authorities;
-
-
 }

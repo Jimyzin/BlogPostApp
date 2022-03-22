@@ -23,14 +23,12 @@ public class Post {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
+    @JoinColumn(name = "username", referencedColumnName = "username", nullable = false)
     private User user;
 
     @CreationTimestamp
-    // @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime creationTimestamp;
 
     @UpdateTimestamp
-    // @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime lastUpdatedTimestamp;
 }
