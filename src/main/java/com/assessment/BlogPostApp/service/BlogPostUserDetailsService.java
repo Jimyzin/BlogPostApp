@@ -18,7 +18,7 @@ public class BlogPostUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { //TODO: use optional properly
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var user = userRepository.findByUsername(username);
 
         if (user.isPresent()) {

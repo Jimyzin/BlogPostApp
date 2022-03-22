@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class BlogController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public PostResponse create(Principal principal, @RequestBody PostRequest postRequest) throws IncorrectUserException {
+    public PostResponse create(Principal principal, @Valid @RequestBody PostRequest postRequest) throws IncorrectUserException {
         log.info("{} is creating a blog post titled {}", principal.getName(), postRequest.getTitle());
         return postService.create(securityUtil.extractUser(principal), postRequest);
     }

@@ -1,5 +1,5 @@
 server:
-  port: 8085
+  port: ${PORT:8085}
 spring:
   datasource:
     url: jdbc:h2:mem:blogpostdb
@@ -7,7 +7,7 @@ spring:
     password: password@12
     driver-class-name: org.h2.Driver
   jpa:
-    show-sql: true
+    show-sql: false
     spring:
       jpa:
         database-platform: org.hibernate.dialect.H2Dialect
@@ -22,9 +22,13 @@ spring:
       enabled: true
 logging:
   level:
+    root: WARN
+    com:
+      assessment:
+        BlogPostApp: INFO
     org:
       hibernate:
-        SQL: debug
+        SQL: INFO
         type:
           descriptor:
             sql:

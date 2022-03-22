@@ -147,7 +147,6 @@ public class PostService {
     /**
      * Strictly, only the ADMINN can delete any blog post
      *
-     * @param user
      * @param postId
      * @throws BlogPostNotFoundException if the postId does not exist
      */

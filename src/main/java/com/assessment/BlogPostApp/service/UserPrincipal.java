@@ -31,22 +31,22 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; //TODO: pending implementation
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; //TODO: pending implementation
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true; //TODO: pending implementation
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return true; //TODO: pending implementation
+        return true;
     }
 
     public User getUser() {
