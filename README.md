@@ -42,7 +42,7 @@ The application uses Baic Authentication. The following are pre-existing users f
 1. A blog comprises of 2 parts - title and content.
 2. ``Embedded H2`` has been used as the datasource for this application.
 3. Authorisation roles supported in the application are ``ROLE_ADMIN`` and ``ROLE_USER``.
-4. The users - ``admin`` and ``user2`` are populated in the database during the bootup from ``/resources/data.sql``
+4. The users - ``admin`` and ``user2`` are populated in the database during the bootup from ``/resources/data.sql``.
 5. Users have many-to-many relationship with authorisation roles.
 6. A user may have multiple blog posts.
 7. All users can see all blogs - their own ones as well as the ones created by others.
@@ -61,8 +61,9 @@ The application uses Baic Authentication. The following are pre-existing users f
 6. A user must have proper authorisations defined by their roles in order to call REST APIs. The user and authorisation details are held in H2 datasource.
 7. Spring Security has been implemented by extending ``UserDetailsService`` and ``UserDetails`` interfaces.
 8. ``Method-level`` authorisations have also been implemented to grant access based on user roles.
-9. ``Bean Validation`` is performed on the input parameters including designing a ``cuatom bean validation and annotation`` for ``PostupdateRequest``
-10. The service and controller layers are covered with Junit5 test cases.
-11. Performance Optimisations have been placed - The ``User`` object fetched from database (and embedded in ``Principal`` object) at the time of authentication are reused in the service layer without fetching again from the database.
-12. BlogPostApp is deployed in Heroku.
+9. The passwords are encrypted and then stored in the datasource.
+10. ``Bean Validation`` is performed on the input parameters including designing a ``cuatom bean validation and annotation`` for ``PostupdateRequest``
+11. The service and controller layers are covered with Junit5 test cases.
+12. Performance Optimisations have been placed - The ``User`` object fetched from database (and embedded in ``Principal`` object) at the time of authentication are reused in the service layer without fetching again from the database.
+13. BlogPostApp is deployed in Heroku.
 
