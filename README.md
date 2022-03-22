@@ -32,7 +32,7 @@ DELETE| /blog/{postId}/delete                            | Deletes a specific bl
 DELETE| /blog/{postId}/adminDelete                       | Deletes a specific blog post owned by any user   | ADMIN                                 | https://sujoykb-blog-post-app.herokuapp.com/blog/adminDelete     |
 
 ```
-The application user Baic Authentication. The following are pre-existing users for testing.
+The application uses Baic Authentication. The following are pre-existing users for testing.
    username: user2                username: admin
    password: pass2                password: admin
    role: ROLE_USER                role: ROLE_ADMIN
