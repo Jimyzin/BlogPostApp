@@ -2,6 +2,7 @@ package com.assessment.BlogPostApp.service;
 
 import com.assessment.BlogPostApp.dto.PostRequest;
 import com.assessment.BlogPostApp.dto.PostResponse;
+import com.assessment.BlogPostApp.dto.PostUpdateRequest;
 import com.assessment.BlogPostApp.dto.ViewResponse;
 import com.assessment.BlogPostApp.entity.Post;
 import com.assessment.BlogPostApp.entity.User;
@@ -52,20 +53,20 @@ public class PostService {
      * Updates an existing blog post. Strictly, only the owner of the post can update.
      *
      * @param user
-     * @param postRequest
+     * @param postUpdateRequest
      * @param postId
      * @return an updated PostResponse
      * @throws BlogPostNotFoundException, if the postId does not belong to the USER
      */
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public PostResponse update(User user, PostRequest postRequest, Integer postId) throws BlogPostNotFoundException {
+    public PostResponse update(User user, PostUpdateRequest postUpdateRequest, Integer postId) throws BlogPostNotFoundException {
         // finding a post by the USER and postId
         var postOptional = postRepository.findByPostIdAndUser(postId, user);
 
         if (postOptional.isPresent()) {
             var post = postOptional.get();
-            post.setTitle(postRequest.getTitle());
-            post.setContent(postRequest.getContent());
+            post.setTitle(isPresent(postUpdateRequest.getTitle()) ? postUpdateRequest.getTitle() : post.getTitle());
+            post.setContent(isPresent(postUpdateRequest.getContent()) ? postUpdateRequest.getContent() : post.getContent());
             post.setLastUpdatedTimestamp(LocalDateTime.now());
 
             return PostResponse.from(postRepository.save(post));
@@ -161,6 +162,10 @@ public class PostService {
             log.error(errorMessage);
             throw new BlogPostNotFoundException(errorMessage);
         }
+    }
+
+    private boolean isPresent(String input) {
+        return (input != null) && !(input.isBlank());
     }
 
 

@@ -1,30 +1,25 @@
 package com.assessment.BlogPostApp.controller;
 
 import com.assessment.BlogPostApp.dto.PostRequest;
+import com.assessment.BlogPostApp.dto.PostUpdateRequest;
 import com.assessment.BlogPostApp.entity.Authority;
 import com.assessment.BlogPostApp.entity.User;
 import com.assessment.BlogPostApp.exception.BlogPostNotFoundException;
 import com.assessment.BlogPostApp.exception.IncorrectUserException;
 import com.assessment.BlogPostApp.service.PostService;
-import com.assessment.BlogPostApp.service.UserPrincipal;
-import com.assessment.BlogPostApp.uttil.SecurityUtil;
+import com.assessment.BlogPostApp.util.SecurityUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.security.Principal;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -84,6 +79,17 @@ public class BlogControllerTest {
 
     @Test
     @WithMockUser(username = "test_admin", roles = {"ADMIN"})
+    public void givenAdmin_whenCreateWithInvalidInputs_thenException() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        this.mockMvc.perform(post("/blog/create")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(new PostRequest()))
+                )
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @WithMockUser(username = "test_admin", roles = {"ADMIN"})
     public void givenAdmin_whenUpdate_thenReturnHttpOK() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         this.mockMvc.perform(patch("/blog/1/update")
@@ -95,9 +101,20 @@ public class BlogControllerTest {
 
     @Test
     @WithMockUser(username = "test_admin", roles = {"ADMIN"})
+    public void givenAdmin_whenUpdateWithInvalidInputs_thenException() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        this.mockMvc.perform(patch("/blog/1/update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(new PostUpdateRequest()))
+                )
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @WithMockUser(username = "test_admin", roles = {"ADMIN"})
     public void givenAdmin_whenUpdateThrowsBlogPostNotFoundException_thenReturnHttpNotFound() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        when(postService.update(any(User.class), any(PostRequest.class), any(Integer.class)))
+        when(postService.update(any(User.class), any(PostUpdateRequest.class), any(Integer.class)))
                 .thenThrow(BlogPostNotFoundException.class);
         this.mockMvc.perform(patch("/blog/1/update")
                         .contentType(MediaType.APPLICATION_JSON)

@@ -1,4 +1,4 @@
-package com.assessment.BlogPostApp.uttil;
+package com.assessment.BlogPostApp.util;
 
 import com.assessment.BlogPostApp.entity.User;
 import com.assessment.BlogPostApp.exception.IncorrectUserException;

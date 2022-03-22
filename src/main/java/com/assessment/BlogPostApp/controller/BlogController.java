@@ -2,17 +2,20 @@ package com.assessment.BlogPostApp.controller;
 
 import com.assessment.BlogPostApp.dto.PostRequest;
 import com.assessment.BlogPostApp.dto.PostResponse;
+import com.assessment.BlogPostApp.dto.PostUpdateRequest;
 import com.assessment.BlogPostApp.dto.ViewResponse;
 import com.assessment.BlogPostApp.exception.BlogPostNotFoundException;
 import com.assessment.BlogPostApp.exception.IncorrectUserException;
 import com.assessment.BlogPostApp.service.PostService;
-import com.assessment.BlogPostApp.uttil.SecurityUtil;
+import com.assessment.BlogPostApp.util.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.security.Principal;
 import java.util.List;
 
@@ -39,9 +42,9 @@ public class BlogController {
 
     @PatchMapping("/{postId}/update")
     @ResponseStatus(HttpStatus.OK)
-    public PostResponse update(Principal principal, @RequestBody PostRequest postRequest, @PathVariable Integer postId) throws BlogPostNotFoundException, IncorrectUserException {
+    public PostResponse update(Principal principal, @Valid @RequestBody PostUpdateRequest postUpdateRequest, @PathVariable Integer postId) throws BlogPostNotFoundException, IncorrectUserException {
         log.info("{} is updating blog post id: {}", principal.getName(), postId);
-        return postService.update(securityUtil.extractUser(principal), postRequest, postId);
+        return postService.update(securityUtil.extractUser(principal), postUpdateRequest, postId);
     }
 
     @GetMapping("/viewAll")

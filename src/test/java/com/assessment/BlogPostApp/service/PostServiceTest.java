@@ -1,6 +1,7 @@
 package com.assessment.BlogPostApp.service;
 
 import com.assessment.BlogPostApp.dto.PostRequest;
+import com.assessment.BlogPostApp.dto.PostUpdateRequest;
 import com.assessment.BlogPostApp.entity.Authority;
 import com.assessment.BlogPostApp.entity.Post;
 import com.assessment.BlogPostApp.entity.User;
@@ -51,7 +52,7 @@ public class PostServiceTest {
         when(postRepository.findByPostIdAndUser(anyInt(), any(User.class))).thenReturn(Optional.of(mockPost(1)));
         when(postRepository.save(any(Post.class))).thenReturn(mockPost(1));
 
-        var postResponse = postService.update(mockUser(), mockPostRequest(1), 1);
+        var postResponse = postService.update(mockUser(), mockPostUpdateRequest(1), 1);
         assertThat(postResponse).isNotNull();
         assertThat(postResponse.getPostId()).isEqualTo(1);
     }
@@ -60,7 +61,7 @@ public class PostServiceTest {
     @WithMockUser(username = "admin", roles = {"ADMIN"})
     public void givenAdmin_whenUpdatePostThrowsBlogPostNotFoundException_thenAssertException() {
         Assertions.assertThrows(BlogPostNotFoundException.class,
-                () -> postService.update(mockUser(), mockPostRequest(1), 1)
+                () -> postService.update(mockUser(), mockPostUpdateRequest(1), 1)
         );
 
     }
@@ -159,6 +160,13 @@ public class PostServiceTest {
         postRequest.setTitle("Test Title - " + postId);
         postRequest.setContent("Test content - " + postId);
         return postRequest;
+    }
+
+    private PostUpdateRequest mockPostUpdateRequest(int postId) {
+        return PostUpdateRequest.builder()
+                .title("Test Title - " + postId)
+                .content("Test content - " + postId)
+                .build();
     }
 
     private User mockUser() {
