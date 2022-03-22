@@ -31,6 +31,12 @@ GET| /blog/myViewAll                                  | Shows all blog posts own
 DELETE| /blog/{postId}/delete                            | Deletes a specific blog post owned by the user   | USER and ADMIN                        | https://sujoykb-blog-post-app.herokuapp.com/blog/{postId}/delete |
 DELETE| /blog/{postId}/adminDelete                       | Deletes a specific blog post owned by any user   | ADMIN                                 | https://sujoykb-blog-post-app.herokuapp.com/blog/adminDelete     |
 
+```
+The application user Baic Authentication. The following are pre-existing users for testing.
+   username: user2                username: admin
+   password: pass2                password: admin
+   role: ROLE_USER                role: ROLE_ADMIN
+```
 
 ### Assumptions
 1. A blog comprises of 2 parts - title and content.
