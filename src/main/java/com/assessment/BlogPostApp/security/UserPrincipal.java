@@ -1,4 +1,4 @@
-package com.assessment.BlogPostApp.service;
+package com.assessment.BlogPostApp.security;
 
 import com.assessment.BlogPostApp.entity.User;
 import org.springframework.security.core.GrantedAuthority;

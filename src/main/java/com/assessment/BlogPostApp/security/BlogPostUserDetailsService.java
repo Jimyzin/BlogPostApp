@@ -1,4 +1,4 @@
-package com.assessment.BlogPostApp.service;
+package com.assessment.BlogPostApp.security;
 
 import com.assessment.BlogPostApp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

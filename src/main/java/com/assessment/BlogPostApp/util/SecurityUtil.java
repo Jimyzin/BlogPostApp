@@ -2,7 +2,7 @@ package com.assessment.BlogPostApp.util;
 
 import com.assessment.BlogPostApp.entity.User;
 import com.assessment.BlogPostApp.exception.IncorrectUserException;
-import com.assessment.BlogPostApp.service.UserPrincipal;
+import com.assessment.BlogPostApp.security.UserPrincipal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
