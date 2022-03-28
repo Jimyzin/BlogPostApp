@@ -10,8 +10,6 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Builder
 public class Authority implements GrantedAuthority {
 
